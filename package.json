@@ -1,0 +1,17 @@
+{
+  "name": "skeleton-validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild main.ts --bundle --target=es2022,chrome100,edge100 --outfile=dist/skeleton-validator.js",
+    "watch": "esbuild main.ts --bundle --target=es2022,chrome100,edge100 --outfile=dist/skeleton-validator.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.15.14"
+  }
+}

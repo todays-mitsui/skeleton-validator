@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+</head>
+<body>
+<form action="">
+  <dl>
+    <dt><label for="field01">名前</label></dt>
+    <dd><input type="text" id="field01" name="name" value="テスト名前"></dd>
+  </dl>
+  <dl>
+    <dt><label for="field02">ふりがな</label></dt>
+    <dd><input type="text" id="field02" name="kana"></dd>
+  </dl>
+  <dl>
+    <dt><label for="field03">住所</label></dt>
+    <dd><input type="text" id="field03" name="address"></dd>
+  </dl>
+  <dl>
+    <dt><span>言語</span></dt>
+    <dd>
+      <ul>
+        <li><label><input type="checkbox" name="lang[]" value="ja">日本語</label></li>
+        <li><label><input type="checkbox" name="lang[]" value="en">英語</label></li>
+        <li><label><input type="checkbox" name="lang[]" value="de">ドイツ語</label></li>
+      </ul>
+    </dd>
+  </dl>
+  <dl>
+    <dt><label for="field05">年度</label></dt>
+    <dd>
+      <select name="year" id="field05">
+        <option value="2020">2020年</option>
+        <option value="2021">2021年</option>
+        <option value="2022">2022年</option>
+      </select>
+    </dd>
+  </dl>
+  <div>
+    <button type="submit">送信</button>
+  </div>
+</form>
+
+<script src="dist/skeleton-validator.js"></script>
+<script>
+{
+  const form = document.querySelector('form');
+  form.addEventListener('init.SkeletonValidator', event => {
+    console.info({ 'init.SkeletonValidator': event.detail });
+  });
+  form.addEventListener('valid.SkeletonValidator', event => {
+    console.info({ 'valid.SkeletonValidator': event.detail });
+  });
+  form.addEventListener('invalid.SkeletonValidator', event => {
+    console.info({ 'invalid.SkeletonValidator': event.detail });
+  });
+  form.addEventListener('change.SkeletonValidator', event => {
+    console.info({ 'change.SkeletonValidator': event.detail });
+  });
+
+  const validator = new SkeletonValidator('form', {
+    rules: {
+      address: {
+        required: true,
+      },
+    }
+  });
+  console.log({ validator });
+}
+</script>
+</body>
+</html>
