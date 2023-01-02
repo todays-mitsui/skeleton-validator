@@ -32,6 +32,7 @@ export class SkeletonValidator {
     this.methods = methods;
 
     this.formHandle = getForm(formHandleEitherSelector);
+    this.formHandle.novalidate = true;
 
     this.settings = {
       // Validation of a current field after the events of "change", "keyup", "blur"
@@ -77,7 +78,6 @@ export class SkeletonValidator {
     this._eventSubmit = this._eventSubmit.bind(this);
     this._eventChangeWithDelay = this._eventChangeWithDelay.bind(this);
     this._eventChange = this._eventChange.bind(this);
-
     this.addEventListener();
 
     this.dispatchEvent('init');
@@ -124,7 +124,17 @@ export class SkeletonValidator {
 
     for (const [name, handles] of Object.entries(inputs)) {
       const values = getValues(handles);
+
       const rules = this.settings.rules[name] ?? {};
+
+      if (handles.length === 1 && handles[0].required) {
+        rules.required = rules.required || true;
+      }
+
+      if (handles.length === 1 && handles[0].pattern) {
+        rules.pattern = rules.pattern || handles[0].pattern;
+      }
+
       const errors = this.validateValue(rules, values);
 
       fields[name] = {
